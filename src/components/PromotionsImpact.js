@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/PromotionsImpact.css';
+import ajax from '../services/fetchService';
+import Chart from "chart.js/auto";
 
 const PromotionsImpact = () => {
   const [year, setYear] = useState('');
   const [predictedValue, setPredictedValue] = useState('');
+  const [salesValues, setSalesValues] = useState('');
+
+  useEffect(() => {
+    ajax("http://localhost:5000/api/form4", "GET")
+      .then((data) => {
+        setSalesValues(JSON.parse(data.message))
+      }).catch(e => {
+        console.log(e);
+      });
+  })
 
   const handleYearChange = (event) => {
     setYear(event.target.value);
@@ -14,6 +26,47 @@ const PromotionsImpact = () => {
     setPredictedValue('Prediction Result');
   };
 
+  function showData() {
+
+
+    const ctx = document.getElementById('chart');
+
+    let years = [];
+    let values = [];
+
+
+    for (let i = 0; i < salesValues.length; i++) {
+      years.push(salesValues[i].order_year)
+    }
+
+    for (let i = 0; i < salesValues.length; i++) {
+      values.push(salesValues[i].count_disc)
+    }
+
+    // console.log(years);
+    // console.log(values);
+    // console.log(salesValues);
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: years,
+        datasets: [{
+          label: '# of Sales',
+          data: values,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+
   return (
     <div className="promotion-impact-container">
       <div className="header">
@@ -21,10 +74,10 @@ const PromotionsImpact = () => {
       </div>
       <div className="content">
         <div className="chart-container">
-          {/* Chart rendering element (like a canvas or SVG) */}
+          <canvas id="chart"></canvas>
         </div>
         <div className="controls-container">
-          <button className="show-button">Show</button>
+          <button className="show-button" onClick={showData}>Show</button>
         </div>
         <div className="data-container">
           <div className="input-group">
