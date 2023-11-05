@@ -1,0 +1,62 @@
+.promotion-impact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%; /* Adjust width as needed */
+    margin: 0 auto;
+  }
+  
+  .header {
+    margin-bottom: 20px;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .chart-container {
+    width: 65%;
+    height: 300px;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    /* Placeholder for chart content */
+  }
+  
+  .controls-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+    padding: 10px;
+  }
+  
+  .show-button,
+  .predict-button {
+    padding: 10px 20px;
+    margin-bottom: 10px;
+  }
+  
+  .data-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .input-group label {
+    margin-bottom: 5px;
+  }
+  
+  .input-group input {
+    padding: 8px;
+    border: 1px solid #ccc;
+  }
+  

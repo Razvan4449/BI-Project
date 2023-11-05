@@ -1,0 +1,45 @@
+/* Minimalist CSS for the CustomerDemographics component */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .selectors, .results {
+    margin: 20px 0;
+  }
+  
+  .dropdown {
+    margin: 0 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .find-out-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .find-out-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .graph {
+    min-height: 200px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    /* Placeholder styles for graph area */
+  }
+  
+  .dropdown-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  

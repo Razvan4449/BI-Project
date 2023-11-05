@@ -1,0 +1,163 @@
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f3f4f6; /* Light gray background */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .home-content {
+    text-align: center;
+    max-width: 600px; /* Makes sure the content is not too wide */
+  }
+  
+  .home-title {
+    color: #2c3e50; /* Dark blue color */
+    font-family: 'Arial', sans-serif;
+    font-size: 2.5em; /* Large text for the main title */
+    margin-bottom: 0.5em; /* Spacing between title and subtitle */
+  }
+  
+  p {
+    color: #576574; /* Subdued text color for the paragraph */
+    font-family: 'Arial', sans-serif;
+    font-size: 1.1em; /* Slightly larger font size for readability */
+  }
+  
+  /* Keyframes for the dynamic color changing effect */
+  @keyframes colorChange {
+    0%   {color: #d034db;}
+    25%  {color: #b73ce7;}
+    50%  {color: #652ecc;}
+    75%  {color: #0f71f1;}
+    100% {color: #3498db;}
+  }
+  
+  /* Apply the animation to only the title */
+  .home-title {
+    animation: colorChange 5s infinite;
+  }
+  
+  
+  
+  .pie-chart-container {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    margin: 20px auto;
+  }
+  
+  .pie-chart {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: lightblue;
+    clip-path: polygon(50% 50%, 0 50%, 50% 0);
+    animation: fillPie 2s infinite;
+  }
+  
+  .pie-slice {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #4CAF50;
+    transform: rotate(0deg);
+    clip-path: polygon(0 50%, 100% 50%, 50% 0);
+    animation: rotateSlice 2s infinite;
+  }
+  
+  @keyframes fillPie {
+    0%, 100% {
+      clip-path: polygon(50% 50%, 0 50%, 50% 0);
+    }
+    50% {
+      clip-path: polygon(50% 50%, 100% 50%, 50% 0);
+    }
+  }
+  
+  @keyframes rotateSlice {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(-180deg);
+    }
+  }
+  .music-staff-animation {
+    position: absolute;
+    top: 10%;
+    width: 100%;
+    height: 5em;
+    overflow: hidden;
+  }
+  
+  .staff {
+    position: relative;
+    width: 300%;
+    height: 100%;
+    border-top: 1px solid rgb(255, 253, 253);
+    border-bottom: 1px solid rgb(255, 247, 247);
+    animation: moveStaff 10s linear infinite;
+  }
+  
+  .note {
+    color: rgb(245, 235, 235);
+    position: absolute;
+    font-size: 2em;
+    animation: moveNote 10s linear infinite;
+  }
+  
+  .note:nth-child(1) { left: 10%; top: 1em; }
+  .note:nth-child(2) { left: 30%; top: 2em; }
+  .note:nth-child(3) { left: 50%; top: 1.5em; }
+  /* Adjust positions and add more notes as needed */
+  
+  @keyframes moveStaff {
+    0% { left: 100%; }
+    100% { left: -200%; }
+  }
+  
+  @keyframes moveNote {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-300%); }
+  }
+
+  /* ... existing styles ... */
+
+.equalizer-container {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .bar {
+    width: 10px;
+    height: 50px;
+    margin: 0 2px;
+    background-color: #4caf50;
+    animation: equalize 1s ease-in-out infinite;
+  }
+  
+  /* Individual animations for each bar */
+  @keyframes equalize {
+    0%, 100% { height: 50px; }
+    25% { height: 100px; }
+    50% { height: 75px; }
+    75% { height: 125px; }
+  }
+  
+  /* Slightly delay the animation for each bar to create the equalizer effect */
+  .bar-1 { animation-delay: 0.2s; }
+  .bar-2 { animation-delay: 0.4s; }
+  .bar-3 { animation-delay: 0.6s; }
+  .bar-4 { animation-delay: 0.8s; }
+  .bar-5 { animation-delay: 1s; }
+  
+  /* Continue with the rest of your existing styles */
+  
