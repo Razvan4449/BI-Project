@@ -7,6 +7,7 @@ const PromotionsImpact = () => {
   const [year, setYear] = useState('');
   const [predictedValue, setPredictedValue] = useState('');
   const [salesValues, setSalesValues] = useState('');
+  const [isCanvasDisplaied, setCanvasDisplaied] = useState('');
 
   useEffect(() => {
     ajax("http://localhost:5000/api/form4", "GET")
@@ -46,25 +47,29 @@ const PromotionsImpact = () => {
     // console.log(years);
     // console.log(values);
     // console.log(salesValues);
-
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: years,
-        datasets: [{
-          label: '# of Sales',
-          data: values,
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
+    if (!isCanvasDisplaied) {
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: years,
+          datasets: [{
+            label: '# of Sales',
+            data: values,
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
           }
         }
-      }
-    });
+      });
+
+      setCanvasDisplaied(true)
+    }
+
   }
 
   return (
