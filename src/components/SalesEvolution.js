@@ -13,7 +13,7 @@ const SalesEvolution = () => {
   const [prediction, setPrediction] = useState('');
   const [salesValues7, setSalesValues7] = useState('');
 
-  
+
 
   useEffect(() => {
     ajax("http://localhost:5000/api/form2", "GET")
@@ -25,7 +25,7 @@ const SalesEvolution = () => {
   }, [])
 
   function showPrediction() {
-      ajax("http://localhost:5000/api/form2/prediction?months=" + months, "GET")
+    ajax("http://localhost:5000/api/form2/prediction?months=" + months + "&predictionType=" + prediction, "GET")
       .then((data) => {
         setPredictionData(Object.entries(JSON.parse(data.message)))
       }).catch(e => {
@@ -95,24 +95,24 @@ const SalesEvolution = () => {
         <canvas id="chart"></canvas>
       </div>
       <div className="chart-container">
-      {predictionData ? 
-      <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Sales Value</th>
-        </tr>
-      </thead>
-      <tbody>
-        {predictionData.map(([date, salesValue], index) => (
-          <tr key={index}>
-            <td>{date}</td>
-            <td>{salesValue}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-      :  ''}
+        {predictionData ?
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Sales Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              {predictionData.map(([date, salesValue], index) => (
+                <tr key={index}>
+                  <td>{date}</td>
+                  <td>{salesValue}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          : ''}
 
       </div>
       <button onClick={showData}>Show</button>
@@ -123,19 +123,19 @@ const SalesEvolution = () => {
         <div className="trend-type-selector">
           {/* Dropdown to select trend type */}
         </div>
-        
+
         <input type="number" placeholder="Enter number of months" onChange={(event) => { setMonths(event.target.value) }} />
-        
+
         <label htmlFor="prediction-select">Select the prediction:</label>
         <select id="prediction-select" name="prediction" onChange={(event) => { setPrediction(event.target.value) }}>
           <option>--Please choose an option--</option>
-          <option value="Logarithmic">Logarithmic</option>
-          <option value="Linear">Linear</option>
-          <option value="Polinomial">Polinomial</option>
-          <option value="Power">Power</option>
-          <option value="Exponential">Exponential</option>
+          <option value="1">Logarithmic</option>
+          <option value="2">Linear</option>
+          <option value="3">Polinomial</option>
+          <option value="4">Power</option>
+          <option value="5">Exponential</option>
         </select>
-        
+
         <button onClick={exportDataWithJsExcel}>Excel export</button>
         <button onClick={showPrediction}>Predict</button>
 

@@ -10,6 +10,9 @@ function SupplyManagement() {
   const [salesValues3, setSalesValues3] = useState('');
   const [salesValues4, setSalesValues4] = useState('');
   const [salesValues5, setSalesValues5] = useState('');
+  const [mediaType, setMediaType] = useState('');
+  const [year, setYear] = useState('')
+  const [predictedValue, setPredictedValue] = useState('')
 
   useEffect(() => {
     ajax("http://localhost:5000/api/form3?mediaType=MPEG_audio_file", "GET")
@@ -222,6 +225,15 @@ function SupplyManagement() {
     });
   }
 
+  function showPredict() {
+    ajax("http://localhost:5000/api/form3/prediction?mediaType=" + mediaType + "&year=" + year, "GET")
+      .then((data) => {
+        setPredictedValue(data.message)
+      }).catch(e => {
+        console.log(e);
+      });
+  }
+
 
   return (
     <div className="supply-management">
@@ -262,16 +274,19 @@ function SupplyManagement() {
       <div className="footer">
         <div className="form">
           <label htmlFor="mediaType">Choose the media type:</label>
-          <select id="mediaType">
-            <option value="cd">CD</option>
-            <option value="dvd">DVD</option>
-            <option value="cassette">Cassette</option>
+          <select id="mediaType" onChange={(event) => { setMediaType(event.target.value) }}>
+            <option>--Please choose an option--</option>
+            <option value="MPEG_audio_file">MPEG_audio_file</option>
+            <option value="Show_Protected_AAC_audio_file">Show Protected AAC audio file</option>
+            <option value="Protected_MPEG-4_video_file">Protected MPEG-4 video file</option>
+            <option value="Purchased_AAC_audio_file-4_video_file">Purchased AAC audio file</option>
+            <option value="AAC_audio_file">AAC audio file</option>
           </select>
           <label htmlFor="year">Enter year:</label>
-          <input type="text" id="year" />
-          <button>Predict</button>
+          <input type="text" id="year" onChange={(event) => { setYear(event.target.value) }} />
+          <button onClick={showPredict}>Predict</button>
           <label htmlFor="predictedCount">Predicted count:</label>
-          <input type="text" id="predictedCount" disabled />
+          <input type="text" id="predictedCount" value={predictedValue} disabled />
         </div>
       </div>
     </div>

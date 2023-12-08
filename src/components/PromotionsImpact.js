@@ -11,6 +11,7 @@ const PromotionsImpact = () => {
   const [salesValues, setSalesValues] = useState('');
   const [isCanvasDisplaied, setCanvasDisplaied] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
+  const [prediction, setPrediction] = useState('');
 
   useEffect(() => {
     ajax("http://localhost:5000/api/form4", "GET")
@@ -21,14 +22,14 @@ const PromotionsImpact = () => {
       });
   })
 
-  const handleYearChange = (event) => {
-    setYear(event.target.value);
-  };
-
-  const handlePredictClick = () => {
-    // You would replace this with actual prediction logic
-    setPredictedValue('Prediction Result');
-  };
+  function showPredictions() {
+    ajax("http://localhost:5000/api/form4/prediction?year=" + year + "&predictionType=" + prediction, "GET")
+      .then((data) => {
+        setPredictedValue(data.message)
+      }).catch(e => {
+        console.log(e);
+      });
+  }
 
   function showData() {
 
@@ -118,9 +119,18 @@ const PromotionsImpact = () => {
               type="text"
               id="year-input"
               value={year}
-              onChange={handleYearChange}
+              onChange={(event) => { setYear(event.target.value) }}
             />
           </div>
+          <label htmlFor="season-select">Select the prediction:</label>
+          <select id="season-select" name="season" onChange={(event) => { setPrediction(event.target.value) }}>
+            <option>--Please choose an option--</option>
+            <option value="1">Logarithmic</option>
+            <option value="2">Linear</option>
+            <option value="3">Polynomial</option>
+            <option value="4">Power</option>
+            <option value="5">Exponential</option>
+          </select>
           <div className="input-group">
             <label htmlFor="predicted-value">Predicted value:</label>
             <input
@@ -130,7 +140,7 @@ const PromotionsImpact = () => {
               disabled
             />
           </div>
-          <button className="predict-button" onClick={handlePredictClick}>
+          <button className="predict-button" onClick={showPredictions}>
             Predict
           </button>
         </div>
